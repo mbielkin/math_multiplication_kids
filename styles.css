@@ -1,0 +1,38 @@
+:root {
+  --error-color: red;
+  --correct-color: green;
+}
+
+content {
+  display: flex;
+  width: 700px;
+  flex-wrap: wrap;
+  gap: 2vw;
+}
+
+.number-block {
+  width: 200px;
+}
+
+.number-block > div {
+  margin-top: 5px;
+}
+
+input[type="text"] {
+  width: 50px;
+}
+
+.finish-button {
+  width: 100px;
+  height: 50px;
+  margin: 35px auto;
+  display: block;
+}
+
+.error {
+  border: 1px solid var(--error-color);
+}
+
+.correct {
+  border: 1px solid var(--correct-color);
+}
