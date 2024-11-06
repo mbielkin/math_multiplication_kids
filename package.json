@@ -4,7 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "css-generate": "npx tailwindcss -i ./styles.css -o ./styles.build.css --watch"
+    "css-generate": "npx tailwindcss -i ./styles.css -o ./styles.build.css",
+    "css-generate-watch": "npx tailwindcss -i ./styles.css -o ./styles.build.css --watch"
   },
   "keywords": [],
   "author": "",
