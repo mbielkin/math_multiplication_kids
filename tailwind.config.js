@@ -8,6 +8,9 @@ module.exports = {
     extend: {
       animation: {
         'spin-one-time': 'spin 1s linear 1'
+      },
+      transitionProperty: {
+        'opacity': 'opacity'
       }
     },
   },

@@ -15,6 +15,7 @@ document.querySelector('main').addEventListener('click', (event) => {
 
   animateButton(event.target);
   generateLevel(complexity);
+  document.querySelector('section').classList.remove('opacity-0');
 });
 
 function animateButton(button) {
