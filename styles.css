@@ -5,9 +5,10 @@
 
 content {
   display: flex;
-  width: 700px;
+  width: clamp(200px, 80vw, 700px);
   flex-wrap: wrap;
   gap: 2vw;
+  margin: 0 auto;
 }
 
 .number-block {
