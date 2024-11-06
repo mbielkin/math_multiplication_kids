@@ -4,13 +4,25 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Таблица умножения</title>
-    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <link rel="stylesheet" type="text/css" href="./styles.build.css" />
   </head>
   <body>
-    <main>
-      <input type="button" value="Базовый уровень" class="level-btn" data-complexity="basic" />
-      <input type="button" value="Сложный уровень" class="level-btn" data-complexity="advanced" />
-      <content></content>
+    <main class="mx-4 my-4">
+      <button
+        type="button"
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        data-complexity="basic"
+      >
+        Базовый уровень
+      </button>
+      <button
+        type="button"
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        data-complexity="advanced"
+      >
+        Сложный уровень
+      </button>
+      <content class="flex flex-row flex-wrap my-0 mx-auto gap-8 w-fit mt-8"></content>
     </main>
 
     <script src="js/app.js"></script>

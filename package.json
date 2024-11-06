@@ -1,0 +1,15 @@
+{
+  "name": "math_multiplication_kids",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "css-generate": "npx tailwindcss -i ./styles.css -o ./styles.build.css --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "tailwindcss": "^3.4.14"
+  }
+}

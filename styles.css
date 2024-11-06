@@ -1,39 +1,26 @@
-:root {
-  --error-color: red;
-  --correct-color: green;
-}
-
-content {
-  display: flex;
-  width: clamp(200px, 80vw, 700px);
-  flex-wrap: wrap;
-  gap: 2vw;
-  margin: 0 auto;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 .number-block {
-  width: 200px;
+  max-width: 200px;
 }
 
 .number-block > div {
   margin-top: 5px;
 }
 
+.number-block span {
+  width: 70px;
+}
+
 input[type="text"] {
-  width: 50px;
+  width: 70px;
+  transition: 0.3s;
 }
 
 .finish-button {
-  width: 100px;
   height: 50px;
   margin: 35px auto;
   display: block;
-}
-
-.error {
-  border: 1px solid var(--error-color);
-}
-
-.correct {
-  border: 1px solid var(--correct-color);
 }
