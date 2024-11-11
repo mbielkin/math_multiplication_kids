@@ -1,11 +1,17 @@
-import { animateButton, cleanContent, createNumbersBlock, generateFinishButton, randomSort } from "./common.js";
+import {
+  animateButton,
+  cleanContent,
+  createNumbersBlock,
+  generateFinishButton,
+  generateNumberLine,
+  randomSort,
+  ROWS_AMOUNT,
+} from "./common.js";
 
 const LEVELS_COMPLEXITY = {
   BASIC: 'basic',
   ADVANCED: 'advanced',
 };
-
-const ROWS_AMOUNT = 9;
 
 const mainElement = document.querySelector('content');
 
@@ -48,7 +54,7 @@ function generateContent(level) {
   }
 
   generatedData.forEach(([firstDigit, secondDigit]) => {
-    generateNumberLine(firstDigit, secondDigit, numbersBlock);
+    generateNumberLine(`${firstDigit} x ${secondDigit} = `, firstDigit * secondDigit, numbersBlock);
 
     if (++rowCounter === ROWS_AMOUNT) {
       mainElement.appendChild(numbersBlock);
@@ -58,24 +64,3 @@ function generateContent(level) {
   });
 }
 
-function generateNumberLine(firstDigit, secondDigit, numberBlock) {
-  const parentElement = document.createElement('div');
-  parentElement.classList.add('flex');
-
-  const line = document.createElement('span');
-  line.classList.add('whitespace-nowrap');
-  line.textContent = `${firstDigit} x ${secondDigit} = `;
-
-  let userInputElement = document.createElement('input');
-  userInputElement.type = 'text';
-  userInputElement.classList.add('rounded', 'border', 'grow')
-
-  let hiddenResultElement = document.createElement('input');
-  hiddenResultElement.type = 'hidden';
-  hiddenResultElement.value = firstDigit * secondDigit;
-
-  parentElement.appendChild(line);
-  parentElement.appendChild(userInputElement);
-  parentElement.appendChild(hiddenResultElement);
-  numberBlock.appendChild(parentElement);
-}
