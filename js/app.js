@@ -1,3 +1,5 @@
+import { animateButton, cleanContent, createNumbersBlock, generateFinishButton, randomSort } from "./common.js";
+
 const LEVELS_COMPLEXITY = {
   BASIC: 'basic',
   ADVANCED: 'advanced',
@@ -18,15 +20,6 @@ document.querySelector('main').addEventListener('click', (event) => {
   document.querySelector('section').classList.remove('opacity-0');
 });
 
-function animateButton(button) {
-  button.classList.add('animate-spin-one-time');
-}
-
-function cleanContent() {
-  document.querySelector('content').innerHTML = '';
-  document.querySelector('.finish-button')?.remove();
-}
-
 function generateLevel(complexity = LEVELS_COMPLEXITY.BASIC) {
   cleanContent();
   generateContent(complexity);
@@ -45,20 +38,13 @@ function generateFullArr() {
   return arr;
 }
 
-function createNumbersBlock() {
-  const numbersBlock = document.createElement('div');
-  numbersBlock.classList.add('number-block', 'transition');
-
-  return numbersBlock;
-}
-
 function generateContent(level) {
   let rowCounter = 0;
   let numbersBlock = createNumbersBlock();
   let generatedData = generateFullArr();
 
   if (level === LEVELS_COMPLEXITY.ADVANCED) {
-    generatedData.sort(() => Math.random() - 0.5);
+    generatedData.sort(randomSort);
   }
 
   generatedData.forEach(([firstDigit, secondDigit]) => {
@@ -92,29 +78,4 @@ function generateNumberLine(firstDigit, secondDigit, numberBlock) {
   parentElement.appendChild(userInputElement);
   parentElement.appendChild(hiddenResultElement);
   numberBlock.appendChild(parentElement);
-}
-
-function generateFinishButton() {
-  const checkButton = document.createElement('button');
-  checkButton.type = 'button';
-  checkButton.textContent = 'Проверить';
-  checkButton.classList.add('finish-button', 'w-80', 'rounded', 'border', 'bg-green-400', 'font-bold', 'text-white');
-
-  checkButton.addEventListener('click', checkValues);
-  document.querySelector('main').appendChild(checkButton);
-}
-
-function checkValues() {
-  const correctColorName = 'border-green-400';
-  const errorColorName = 'border-red-400';
-  let userInputs = Array.from(document.querySelectorAll('input'));
-  userInputs.forEach((input, index) => {
-    if (input.type !== 'text') {
-      return;
-    }
-
-    input.value === userInputs[index + 1].value
-      ? (input.classList.add(correctColorName), input.classList.remove(errorColorName))
-      : (input.classList.add(errorColorName), input.classList.remove(correctColorName));
-  });
 }
