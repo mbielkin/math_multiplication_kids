@@ -20,16 +20,16 @@ function generateLevelsButtons() {
 function generateLevel(levelNumber) {
     cleanContent();
     const exercises = new Map();
-    generateContent({ message: '+1', value: 1 });
-    generateContent({ message: '-1', value: -1 });
+    generateContent({ message: '+ 1', value: 1 });
+    generateContent({ message: '- 1', value: -1 });
 
-    for(let i = 0; i < 5;i++){
-        generateData({ message: '+1', value: 1 }, exercises);
-        generateData({ message: '-1', value: -1 }, exercises);
+    generateData({ message: '+ 1', value: 1 }, exercises);
+    generateData({ message: '- 1', value: -1 }, exercises);
+    
+    const data = [...exercises.entries()];
+    for (let i = 0; i < 5; i++) {
+      generateContent2(data.sort(randomSort));
     }
-    // const data = [...exercises.values()];
-    // console.log(data)
-    // generateContent2(data);
     generateFinishButton();
     document.querySelector('section').classList.remove('opacity-0');
 
@@ -59,11 +59,11 @@ function generateContent(config) {
 function generateContent2(data) {
     let rowCounter = 0;
     let numbersBlock = createNumbersBlock();
-  
+
     data.forEach(([message,value]) => {
       generateNumberLine(message, value, numbersBlock);
   
-      if (++rowCounter === ROWS_AMOUNT) {
+      if (++rowCounter === (ROWS_AMOUNT*2)) {
         mainElement.appendChild(numbersBlock);
         numbersBlock = createNumbersBlock();
         rowCounter = 0;
@@ -74,9 +74,10 @@ function generateContent2(data) {
 
 function generateArr() {
     const arr = [];
-    for (let i = 1, counter = 0; i < 10; i++) {
+    const limit = 10;
+    for (let i = 1, counter = 0; i <= limit; i++) {
         arr.push(i);
-        if (i === 9 && !counter) {
+        if (i === limit && !counter) {
             counter++;
             i = 1;
         }
