@@ -38,7 +38,7 @@ function generateLevel(levelNumber) {
   const minusMap = new Map();
 
   generateContentByMap({ message: "+ 1", value: 1 }, plusMap);
-  generateContentByMap({ message: "- 1", value: -1 }, plusMap);
+  generateContentByMap({ message: "- 1", value: -1 }, minusMap);
 
   // TODO: when have time - this on optimizations
   const data = [...plusMap.entries(), ...minusMap.entries()];

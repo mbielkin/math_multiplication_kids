@@ -6,7 +6,7 @@
     <title>Таблица умножения</title>
     <link rel="stylesheet" type="text/css" href="./styles.build.css" />
   </head>
-  <body>
+  <body class="text-white bg-black">
     <main class="mx-4 my-4">
       <nav>
         <ul class="flex gap-4 mb-4">
@@ -16,23 +16,23 @@
       </nav>
       <button
         type="button"
-        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        class="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700"
         data-complexity="basic"
       >
         Базовый уровень
       </button>
       <button
         type="button"
-        class="bg-indigo-800 hover:bg-indigo-500 text-white font-bold py-2 px-4 rounded transition"
+        class="px-4 py-2 font-bold text-white transition bg-indigo-800 rounded hover:bg-indigo-500"
         data-complexity="advanced"
       >
         Сложный уровень
       </button>
       <section
-        class="flex border border-gray-200 rounded my-4 py-4 px-3 opacity-0 box-border transition-opacity duration-300 shadow-xl"
+        class="box-border flex px-3 py-4 my-4 transition-opacity duration-300 border border-gray-200 rounded shadow-xl opacity-0"
       >
         <content
-          class="flex flex-row flex-wrap my-0 mx-auto gap-8 w-fit"
+          class="flex flex-row flex-wrap gap-8 mx-auto my-0 w-fit"
         ></content>
       </section>
     </main>
