@@ -17,6 +17,7 @@
 input[type="text"] {
   width: 70px;
   transition: 0.3s;
+  color: black;
 }
 
 .finish-button {
