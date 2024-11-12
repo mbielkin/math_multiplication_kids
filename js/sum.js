@@ -20,14 +20,22 @@ function generateLevelsButtons() {
 function generateLevel(levelNumber) {
     cleanContent();
     const exercises = new Map();
-    generateContent({ message: '+ 1', value: 1 });
-    generateContent({ message: '- 1', value: -1 });
+
+// Todo: create function that create all this generated doubled data in more nice way
+
+    generateData({ message: '+ 1', value: 1 }, exercises);
+    generateContent2([...exercises.entries(), ...exercises.entries()].sort(randomSort));
+    exercises.clear();
+    
+    generateData({ message: '- 1', value: -1 }, exercises);
+    generateContent2([...exercises.entries(), ...exercises.entries()].sort(randomSort));
+    exercises.clear();
 
     generateData({ message: '+ 1', value: 1 }, exercises);
     generateData({ message: '- 1', value: -1 }, exercises);
-    
-    const data = [...exercises.entries()];
-    for (let i = 0; i < 5; i++) {
+
+    const data = [...exercises.entries(), ...exercises.entries()];
+    for (let i = 0; i < 2; i++) {
       generateContent2(data.sort(randomSort));
     }
     generateFinishButton();
@@ -44,26 +52,15 @@ function generateData(config, exercisesMap) {
     });
 }
 
-
-function generateContent(config) {
-    let numbersBlock = createNumbersBlock();
-    let generatedData = generateArr();
-
-    generatedData.sort(randomSort).forEach(firstDigit => {
-        generateNumberLine(`${firstDigit} ${config.message} = `, firstDigit + config.value, numbersBlock);
-    });
-    mainElement.appendChild(numbersBlock);
-    numbersBlock = createNumbersBlock();
-}
-
 function generateContent2(data) {
     let rowCounter = 0;
     let numbersBlock = createNumbersBlock();
+console.log(data);
 
     data.forEach(([message,value]) => {
       generateNumberLine(message, value, numbersBlock);
   
-      if (++rowCounter === (ROWS_AMOUNT*2)) {
+      if (++rowCounter === (ROWS_AMOUNT*2)+1) {
         mainElement.appendChild(numbersBlock);
         numbersBlock = createNumbersBlock();
         rowCounter = 0;
@@ -82,6 +79,7 @@ function generateArr() {
             i = 1;
         }
     }
+console.log(arr);
 
     return arr;
 }
