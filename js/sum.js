@@ -19,23 +19,19 @@ function generateLevelsButtons() {
 // TODO: implement different levels according to number
 function generateLevel(levelNumber) {
     cleanContent();
-    const exercises = new Map();
+    const plusMap = new Map();
+    const minusMap = new Map();
 
 // Todo: create function that create all this generated doubled data in more nice way
 
-    generateData({ message: '+ 1', value: 1 }, exercises);
-    generateContent2([...exercises.entries(), ...exercises.entries()].sort(randomSort));
-    exercises.clear();
+    generateData({ message: '+ 1', value: 1 }, plusMap);
+    generateContent2([...plusMap.entries(), ...plusMap.entries()].sort(randomSort));
     
-    generateData({ message: '- 1', value: -1 }, exercises);
-    generateContent2([...exercises.entries(), ...exercises.entries()].sort(randomSort));
-    exercises.clear();
+    generateData({ message: '- 1', value: -1 }, minusMap);
+    generateContent2([...minusMap.entries(), ...minusMap.entries()].sort(randomSort));
 
-    generateData({ message: '+ 1', value: 1 }, exercises);
-    generateData({ message: '- 1', value: -1 }, exercises);
-
-    const data = [...exercises.entries(), ...exercises.entries()];
-    for (let i = 0; i < 2; i++) {
+    const data = [...plusMap.entries(), ...minusMap.entries()];
+    for (let i = 0; i < 4; i++) {
       generateContent2(data.sort(randomSort));
     }
     generateFinishButton();
