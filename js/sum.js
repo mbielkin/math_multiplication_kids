@@ -1,5 +1,6 @@
 import {
   cleanContent,
+  COLS_AMOUNT,
   createNumbersBlock,
   generateFinishButton,
   generateNumberLine,
@@ -8,6 +9,14 @@ import {
 } from "./common.js";
 
 const LEVELS_AMOUNT = 5;
+
+const LEVELS_MAP = {
+  1: generateDigitsLevel,
+  2: generateDigitsLevel.bind(null, 3),
+  3: generateDigitsLevel.bind(null, 5),
+  4: generateDigitsLevel.bind(null, 7),
+  5: generateDigitsLevel.bind(null, 9),
+};
 
 const mainElement = document.querySelector("content");
 
@@ -32,37 +41,43 @@ function generateLevelsButtons() {
 }
 
 // TODO: implement different levels according to number
-function generateLevel(levelNumber) {
+function generateLevel(event) {
   cleanContent();
+  const levelNumber = parseInt(event.target.textContent);
+  LEVELS_MAP[levelNumber]?.();
+}
+
+function generateDigitsLevel(limit) {
   const plusMap = new Map();
   const minusMap = new Map();
+  const start = (!limit || limit < 5) ? 0 : (limit === 9 ? 2 : 1);
 
-  generateContentByMap({ message: "+ 1", value: 1 }, plusMap);
-  generateContentByMap({ message: "- 1", value: -1 }, minusMap);
+  for (let i = start; i <= (limit || 0); i++) {
+    const value = limit ? i : 1;
 
-  // TODO: when have time - this on optimizations
-  const data = [...plusMap.entries(), ...minusMap.entries()];
-  for (let i = 0; i < 4; i++) {
-    generateContent(data.sort(randomSort));
+    generateContentByMap({ message: `+ ${value}`, value: value, limit }, plusMap);
+    generateContentByMap({ message: `- ${value}`, value: -value, limit }, minusMap);
   }
+
+  if (!limit || limit < 5) {
+    const data = [...plusMap.entries(), ...minusMap.entries()].slice(0, 20);
+
+    for (let i = 0; i < COLS_AMOUNT - 2; i++) {
+      generateContent(data.sort(randomSort));
+    }
+  }
+
   generateFinishButton();
   document.querySelector("section").classList.remove("opacity-0");
 }
 
-function generateContentByMap({ message, value }, map) {
-  generateData({ message, value }, map);
-  generateContent([...map.entries(), ...map.entries()].sort(randomSort));
-}
-
-function generateData(config, exercisesMap) {
-  let generatedData = generateArr();
-
-  generatedData.sort(randomSort).forEach((firstDigit) => {
-    exercisesMap.set(
-      `${firstDigit} ${config.message} = `,
-      firstDigit + config.value
-    );
-  });
+function generateContentByMap(config, map) {
+  generateData(config, map);
+  if (!config.limit || config.limit <= 5) {
+    generateContent([...map.entries(), ...map.entries()].sort(randomSort));
+  } else {
+    generateContent([...map.entries()].sort(randomSort));
+  }
 }
 
 function generateContent(data) {
@@ -72,7 +87,7 @@ function generateContent(data) {
   data.forEach(([message, value]) => {
     generateNumberLine(message, value, numbersBlock);
 
-    if (++rowCounter === ROWS_AMOUNT * 2 + 1) {
+    if (++rowCounter === ROWS_AMOUNT) {
       mainElement.appendChild(numbersBlock);
       numbersBlock = createNumbersBlock();
       rowCounter = 0;
@@ -80,15 +95,27 @@ function generateContent(data) {
   });
 }
 
-function generateArr() {
-  const arr = [];
-  const limit = 10;
-  for (let i = 1, counter = 0; i <= limit; i++) {
-    arr.push(i);
-    if (i === limit && !counter) {
-      counter++;
-      i = 1;
+function generateData(config, exercisesMap) {
+  const generatedData = generateArr(config.limit);
+  const doubledArr = [...generatedData, ...generatedData];
+
+  doubledArr.sort(randomSort).forEach((firstDigit) => {
+    // to avoid negative answers
+    if (config.value < 0 && config.value*-1 > firstDigit) {
+      return;
     }
+
+    exercisesMap.set(
+      `${firstDigit} ${config.message} = `,
+      firstDigit + config.value
+    );
+  });
+}
+
+function generateArr(limit = 10) {
+  const arr = [];
+  for (let i = 1; i <= limit; i++) {
+    arr.push(i);
   }
 
   return arr;

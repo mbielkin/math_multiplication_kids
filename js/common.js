@@ -1,4 +1,5 @@
-export const ROWS_AMOUNT = 9;
+export const ROWS_AMOUNT = 20;
+export const COLS_AMOUNT = 6;
 
 export const animateButton = button => button.classList.add('animate-spin-one-time');
 
