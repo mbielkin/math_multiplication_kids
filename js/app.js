@@ -5,8 +5,9 @@ import {
   generateFinishButton,
   generateNumberLine,
   randomSort,
-  ROWS_AMOUNT,
 } from "./common.js";
+
+const ROWS_AMOUNT = 9;
 
 const LEVELS_COMPLEXITY = {
   BASIC: 'basic',

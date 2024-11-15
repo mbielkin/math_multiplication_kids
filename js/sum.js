@@ -73,11 +73,9 @@ function generateDigitsLevel(limit) {
 
 function generateContentByMap(config, map) {
   generateData(config, map);
-  if (!config.limit || config.limit <= 5) {
-    generateContent([...map.entries(), ...map.entries()].sort(randomSort));
-  } else {
-    generateContent([...map.entries()].sort(randomSort));
-  }
+  let resultArr = (!config.limit || config.limit <= 5) ? [...map.entries(), ...map.entries()] : [...map.entries()];
+  
+  generateContent(resultArr.sort(randomSort));
 }
 
 function generateContent(data) {
