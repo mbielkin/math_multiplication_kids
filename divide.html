@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Деление чисел</title>
+    <link rel="stylesheet" type="text/css" href="./styles.build.css" />
+  </head>
+  <body class="text-white bg-black">
+    <main class="mx-4 my-4">
+      <nav>
+        <ul class="flex gap-4 mb-4">
+          <li><a class="underline hover:no-underline" href="./">Умножение</a></li>
+          <li><a class="underline hover:no-underline" href="./sum.html">Сложение</a></li>
+          <li><a class="underline hover:no-underline" href="./divide.html">Деление</a></li>
+        </ul>
+      </nav>
+      <button
+        type="button"
+        class="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700"
+        data-complexity="basic"
+      >
+        Базовый уровень
+      </button>
+      <button
+        type="button"
+        class="px-4 py-2 font-bold text-white transition bg-indigo-800 rounded hover:bg-indigo-500"
+        data-complexity="advanced"
+      >
+        Сложный уровень
+      </button>
+      <section
+        class="box-border flex px-3 py-4 my-4 transition-opacity duration-300 border border-gray-200 rounded shadow-xl opacity-0"
+      >
+        <content
+          class="flex flex-row flex-wrap gap-8 mx-auto my-0 w-fit"
+        ></content>
+      </section>
+    </main>
+
+    <script src="js/divide.js" type="module"></script>
+  </body>
+</html>
