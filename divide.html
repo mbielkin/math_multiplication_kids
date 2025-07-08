@@ -6,15 +6,9 @@
     <title>Деление чисел</title>
     <link rel="stylesheet" type="text/css" href="./styles.build.css" />
   </head>
-  <body class="text-white bg-black">
+  <body class="text-white bg-black" data-mode="divide">
     <main class="mx-4 my-4">
-      <nav>
-        <ul class="flex gap-4 mb-4">
-          <li><a class="underline hover:no-underline" href="./">Умножение</a></li>
-          <li><a class="underline hover:no-underline" href="./sum.html">Сложение</a></li>
-          <li><a class="underline hover:no-underline" href="./divide.html">Деление</a></li>
-        </ul>
-      </nav>
+      <div id="main-menu"></div>
       <button
         type="button"
         class="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700"
@@ -38,6 +32,10 @@
       </section>
     </main>
 
-    <script src="js/divide.js" type="module"></script>
+    <script type="module">
+      import { renderMenu } from './js/menu.js';
+      renderMenu();
+    </script>
+    <script src="js/exercise.js" type="module"></script>
   </body>
 </html>

@@ -2,7 +2,7 @@
   "name": "math_multiplication_kids",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "exercise.js",
   "scripts": {
     "css-generate": "npx tailwindcss -i ./styles.css -o ./styles.build.css --minify",
     "css-generate-watch": "npx tailwindcss -i ./styles.css -o ./styles.build.css --watch"

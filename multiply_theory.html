@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Таблица умножения (теория)</title>
+    <link rel="stylesheet" type="text/css" href="./styles.build.css" />
+  </head>
+  <body class="text-white bg-black">
+    <main class="mx-4 my-4">
+      <nav>
+        <ul class="flex gap-4 mb-4">
+          <li><a class="underline hover:no-underline" href="./">Умножение</a></li>
+          <li><a class="underline hover:no-underline" href="./sum.html">Сложение</a></li>
+          <li><a class="underline hover:no-underline" href="./divide.html">Деление</a></li>
+          <li><a class="underline hover:no-underline" href="./multiply_theory.html">Таблица умножения (теория)</a></li>
+        </ul>
+      </nav>
+      <h1 class="mb-6 text-2xl font-bold text-center">Таблица умножения (теория)</h1>
+      <div class="overflow-x-auto">
+        <table class="w-full overflow-hidden bg-gray-900 border border-gray-700 rounded-lg">
+          <caption class="mb-2 text-lg font-semibold text-white caption-top">Таблица умножения от 1 до 10</caption>
+          <tbody id="mult-table-body">
+            <!-- JS will fill rows here -->
+          </tbody>
+        </table>
+      </div>
+    </main>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const tableBody = document.getElementById('mult-table-body');
+        for (let row = 1; row <= 10; row++) {
+          const tr = document.createElement('tr');
+          for (let col = 1; col <= 10; col++) {
+            const a = row;
+            const b = col;
+            const td = document.createElement('td');
+            td.className = 'border border-gray-700 px-2 py-1 text-center text-white';
+            td.textContent = `${a} x ${b} = ${a * b}`;
+            tr.appendChild(td);
+          }
+          tableBody.appendChild(tr);
+        }
+      });
+    </script>
+  </body>
+</html>

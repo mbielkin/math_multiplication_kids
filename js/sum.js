@@ -45,6 +45,7 @@ function generateLevel(event) {
   cleanContent();
   const levelNumber = parseInt(event.target.textContent);
   LEVELS_MAP[levelNumber]?.();
+  // Timer will start with generateFinishButton
 }
 
 function generateDigitsLevel(limit) {
@@ -74,7 +75,7 @@ function generateDigitsLevel(limit) {
 function generateContentByMap(config, map) {
   generateData(config, map);
   let resultArr = (!config.limit || config.limit <= 5) ? [...map.entries(), ...map.entries()] : [...map.entries()];
-  
+
   generateContent(resultArr.sort(randomSort));
 }
 
@@ -99,7 +100,7 @@ function generateData(config, exercisesMap) {
 
   doubledArr.sort(randomSort).forEach((firstDigit) => {
     // to avoid negative answers
-    if (config.value < 0 && config.value*-1 > firstDigit) {
+    if (config.value < 0 && config.value * -1 > firstDigit) {
       return;
     }
 
