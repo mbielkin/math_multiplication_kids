@@ -20,8 +20,13 @@ export const randomSort = () => Math.random() - 0.5;
 let timerInterval = null;
 let startTime = null;
 let timerElement = null;
+let paused = false;
+let pauseStart = null;
+let pausedTime = 0;
 
 export const generateFinishButton = () => {
+  const timerContainer = document.querySelector('.timer-container');
+  timerContainer.innerHTML = ''; // Clear previous buttons if any
   const checkButton = document.createElement('button');
   checkButton.type = 'button';
   checkButton.textContent = 'Проверить';
@@ -38,13 +43,31 @@ export const generateFinishButton = () => {
   timerElement = document.createElement('div');
   timerElement.classList.add('timer', 'text-lg', 'font-bold', 'mb-4', 'text-center');
   timerElement.textContent = 'Время: 0.0 сек';
-  document.querySelector('main').appendChild(timerElement);
+  timerContainer.appendChild(timerElement);
+
+  // Pause/Resume Button
+  const pauseButton = document.createElement('button');
+  pauseButton.type = 'button';
+  pauseButton.textContent = 'Пауза';
+  pauseButton.classList.add('pause-button', 'w-40', 'rounded', 'border', 'bg-yellow-400', 'font-bold', 'text-black', 'ml-4');
+  pauseButton.addEventListener('click', () => {
+    if (!paused) {
+      pauseTimer();
+      pauseButton.textContent = 'Продолжить';
+    } else {
+      resumeTimer();
+      pauseButton.textContent = 'Пауза';
+    }
+  });
+  timerContainer.appendChild(pauseButton);
 
   startTimer();
 }
 
 function startTimer() {
   startTime = Date.now();
+  paused = false;
+  pausedTime = 0;
   updateTimer();
   timerInterval = setInterval(updateTimer, 100);
 }
@@ -57,9 +80,27 @@ function stopTimer() {
   updateTimer(true);
 }
 
+function pauseTimer() {
+  if (timerInterval) {
+    clearInterval(timerInterval);
+    timerInterval = null;
+    paused = true;
+    pauseStart = Date.now();
+  }
+}
+
+function resumeTimer() {
+  if (paused) {
+    pausedTime += Date.now() - pauseStart;
+    paused = false;
+    pauseStart = null;
+    timerInterval = setInterval(updateTimer, 100);
+  }
+}
+
 function updateTimer(finish = false) {
   if (!timerElement || !startTime) return;
-  const elapsed = (Date.now() - startTime) / 1000;
+  let elapsed = (Date.now() - startTime - pausedTime) / 1000;
   let timeStr = '';
   if (elapsed >= 60) {
     const mins = Math.floor(elapsed / 60);
