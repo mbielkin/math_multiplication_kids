@@ -65,6 +65,7 @@ export const generateFinishButton = () => {
 }
 
 function startTimer() {
+  stopTimer();
   startTime = Date.now();
   paused = false;
   pausedTime = 0;
