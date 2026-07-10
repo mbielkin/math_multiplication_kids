@@ -81,8 +81,12 @@ document.querySelector('main').addEventListener('click', (event) => {
 function updateTableButtonsUI() {
   document.querySelectorAll('[data-table]').forEach((button) => {
     const isActive = button.getAttribute('data-table') === selectedTable;
-    button.classList.toggle('bg-blue-600', isActive);
-    button.classList.toggle('bg-gray-700', !isActive);
+    button.classList.toggle('bg-indigo-500', isActive);
+    button.classList.toggle('hover:bg-indigo-600', isActive);
+    button.classList.toggle('ring-2', isActive);
+    button.classList.toggle('ring-white/50', isActive);
+    button.classList.toggle('bg-slate-700', !isActive);
+    button.classList.toggle('hover:bg-slate-600', !isActive);
   });
 }
 

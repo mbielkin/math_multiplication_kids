@@ -6,41 +6,44 @@
     <title>Деление чисел</title>
     <link rel="stylesheet" type="text/css" href="./styles.build.css" />
   </head>
-  <body class="text-white bg-black" data-mode="divide">
-    <main class="mx-4 my-4">
+  <body class="min-h-screen font-sans text-slate-100 bg-gradient-to-b from-slate-900 via-slate-900 to-indigo-950" data-mode="divide">
+    <main class="max-w-4xl px-4 py-6 mx-auto sm:px-6">
       <div id="main-menu"></div>
-      <button
-        type="button"
-        class="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700"
-        data-complexity="basic"
-      >
-        Базовый уровень
-      </button>
-      <button
-        type="button"
-        class="px-4 py-2 font-bold text-white transition bg-indigo-800 rounded hover:bg-indigo-500"
-        data-complexity="advanced"
-      >
-        Сложный уровень
-      </button>
-      <div class="flex flex-wrap items-center gap-2 my-3">
-        <span class="mr-1 font-bold">Делитель:</span>
-        <button type="button" class="px-3 py-1 text-white bg-blue-600 border rounded" data-table="all">Все</button>
-        <button type="button" class="px-3 py-1 text-white bg-gray-700 border rounded" data-table="1">1</button>
-        <button type="button" class="px-3 py-1 text-white bg-gray-700 border rounded" data-table="2">2</button>
-        <button type="button" class="px-3 py-1 text-white bg-gray-700 border rounded" data-table="3">3</button>
-        <button type="button" class="px-3 py-1 text-white bg-gray-700 border rounded" data-table="4">4</button>
-        <button type="button" class="px-3 py-1 text-white bg-gray-700 border rounded" data-table="5">5</button>
-        <button type="button" class="px-3 py-1 text-white bg-gray-700 border rounded" data-table="6">6</button>
-        <button type="button" class="px-3 py-1 text-white bg-gray-700 border rounded" data-table="7">7</button>
-        <button type="button" class="px-3 py-1 text-white bg-gray-700 border rounded" data-table="8">8</button>
-        <button type="button" class="px-3 py-1 text-white bg-gray-700 border rounded" data-table="9">9</button>
+      <h1 class="mb-6 text-3xl font-extrabold text-center text-teal-300">➗ Тренируемся делить</h1>
+      <div class="flex flex-wrap gap-3 mb-3">
+        <button
+          type="button"
+          class="px-6 py-3 text-lg text-white bg-teal-500 rounded-full shadow-md font-extrabold hover:bg-teal-600 hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200"
+          data-complexity="basic"
+        >
+          🙂 Базовый уровень
+        </button>
+        <button
+          type="button"
+          class="px-6 py-3 text-lg text-white bg-violet-600 rounded-full shadow-md font-extrabold hover:bg-violet-700 hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200"
+          data-complexity="advanced"
+        >
+          🔥 Сложный уровень
+        </button>
+      </div>
+      <div class="flex flex-wrap items-center gap-2 p-3 my-3 rounded-2xl bg-slate-800/60">
+        <span class="mr-1 font-extrabold text-slate-200">Делитель:</span>
+        <button type="button" class="flex items-center justify-center h-10 px-4 font-bold text-white rounded-full shadow-sm bg-indigo-500 ring-2 ring-white/50 hover:bg-indigo-600 hover:shadow-md hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200" data-table="all">Все</button>
+        <button type="button" class="flex items-center justify-center w-10 h-10 font-bold text-white bg-slate-700 rounded-full shadow-sm hover:bg-slate-600 hover:shadow-md hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200" data-table="1">1</button>
+        <button type="button" class="flex items-center justify-center w-10 h-10 font-bold text-white bg-slate-700 rounded-full shadow-sm hover:bg-slate-600 hover:shadow-md hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200" data-table="2">2</button>
+        <button type="button" class="flex items-center justify-center w-10 h-10 font-bold text-white bg-slate-700 rounded-full shadow-sm hover:bg-slate-600 hover:shadow-md hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200" data-table="3">3</button>
+        <button type="button" class="flex items-center justify-center w-10 h-10 font-bold text-white bg-slate-700 rounded-full shadow-sm hover:bg-slate-600 hover:shadow-md hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200" data-table="4">4</button>
+        <button type="button" class="flex items-center justify-center w-10 h-10 font-bold text-white bg-slate-700 rounded-full shadow-sm hover:bg-slate-600 hover:shadow-md hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200" data-table="5">5</button>
+        <button type="button" class="flex items-center justify-center w-10 h-10 font-bold text-white bg-slate-700 rounded-full shadow-sm hover:bg-slate-600 hover:shadow-md hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200" data-table="6">6</button>
+        <button type="button" class="flex items-center justify-center w-10 h-10 font-bold text-white bg-slate-700 rounded-full shadow-sm hover:bg-slate-600 hover:shadow-md hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200" data-table="7">7</button>
+        <button type="button" class="flex items-center justify-center w-10 h-10 font-bold text-white bg-slate-700 rounded-full shadow-sm hover:bg-slate-600 hover:shadow-md hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200" data-table="8">8</button>
+        <button type="button" class="flex items-center justify-center w-10 h-10 font-bold text-white bg-slate-700 rounded-full shadow-sm hover:bg-slate-600 hover:shadow-md hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200" data-table="9">9</button>
       </div>
       <section
-        class="box-border flex px-3 py-4 my-4 transition-opacity duration-300 border border-gray-200 rounded shadow-xl opacity-0"
+        class="box-border flex flex-wrap px-4 py-6 my-4 transition-opacity duration-300 border rounded-2xl shadow-xl opacity-0 bg-slate-900/40 border-slate-700/60"
       >
         <content
-          class="flex flex-row flex-wrap gap-8 mx-auto my-0 w-fit"
+          class="flex flex-row flex-wrap gap-6 mx-auto my-0 w-fit"
         ></content>
       </section>
       <div class="timer-container"></div>
