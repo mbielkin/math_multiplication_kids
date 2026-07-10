@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Мой прогресс</title>
+    <link rel="stylesheet" type="text/css" href="./styles.build.css" />
+  </head>
+  <body class="text-white bg-black">
+    <main class="mx-4 my-4">
+      <div id="main-menu"></div>
+      <h1 class="mb-6 text-2xl font-bold text-center">Мой прогресс</h1>
+      <div id="progress-content" class="flex flex-col max-w-2xl gap-4 mx-auto"></div>
+      <div class="mt-8 text-center">
+        <button
+          id="reset-progress"
+          type="button"
+          class="px-4 py-2 font-bold text-white bg-red-600 rounded hover:bg-red-700"
+        >
+          Сбросить прогресс
+        </button>
+      </div>
+    </main>
+    <script type="module">
+      import { renderMenu } from './js/menu.js';
+      renderMenu();
+    </script>
+    <script src="js/progress-page.js" type="module"></script>
+  </body>
+</html>
