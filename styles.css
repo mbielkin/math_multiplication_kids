@@ -1,27 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-.number-block {
-  max-width: 200px;
+html {
+  scroll-behavior: smooth;
 }
 
-.number-block > div {
-  margin-top: 5px;
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
 }
 
-.number-block span {
-  width: 70px;
+::-webkit-scrollbar-track {
+  background: transparent;
 }
 
-input[type="text"] {
-  width: 70px;
-  transition: 0.3s;
-  color: black;
-}
-
-.finish-button {
-  height: 50px;
-  margin: 35px auto;
-  display: block;
+::-webkit-scrollbar-thumb {
+  background-color: #475569;
+  border-radius: 9999px;
 }

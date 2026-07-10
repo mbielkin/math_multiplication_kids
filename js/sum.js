@@ -20,30 +20,39 @@ const LEVELS_MAP = {
 
 const mainElement = document.querySelector("content");
 
+const LEVEL_ICONS = ["🌱", "🌿", "🌳", "🔥", "⚡"];
+
 function generateLevelsButtons() {
   const parent = document.querySelector(".levels");
   for (let i = 0; i < LEVELS_AMOUNT; i++) {
     const button = document.createElement("button");
     button.type = "button";
+    button.dataset.level = i + 1;
     button.classList.add(
-      "rounded",
-      "p-2",
-      "border",
-      "bg-blue-500",
-      "hover:bg-blue-700",
+      "px-5",
+      "py-3",
+      "text-lg",
+      "rounded-full",
+      "font-extrabold",
       "text-white",
-      "cursor-pointer"
+      "bg-rose-500",
+      "hover:bg-rose-600",
+      "shadow-md",
+      "hover:shadow-lg",
+      "hover:-translate-y-0.5",
+      "active:translate-y-0",
+      "transition-all",
+      "duration-200"
     );
-    button.textContent = i + 1;
+    button.textContent = `${LEVEL_ICONS[i] ?? ""} ${i + 1}`.trim();
     button.addEventListener("click", generateLevel);
     parent.appendChild(button);
   }
 }
 
-// TODO: implement different levels according to number
 function generateLevel(event) {
   cleanContent();
-  const levelNumber = parseInt(event.target.textContent);
+  const levelNumber = parseInt(event.target.dataset.level, 10);
   LEVELS_MAP[levelNumber]?.();
   // Timer will start with generateFinishButton
 }
