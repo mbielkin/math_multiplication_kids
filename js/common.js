@@ -1,3 +1,5 @@
+import { recordSession } from './progress.js';
+
 export const ROWS_AMOUNT = 20;
 export const COLS_AMOUNT = 6;
 
@@ -6,6 +8,7 @@ export const animateButton = button => button.classList.add('animate-spin-one-ti
 export const cleanContent = () => {
   document.querySelector('content').innerHTML = '';
   document.querySelector('.finish-button')?.remove();
+  document.querySelector('.retry-button')?.remove();
 }
 
 export const createNumbersBlock = () => {
@@ -23,6 +26,7 @@ let timerElement = null;
 let paused = false;
 let pauseStart = null;
 let pausedTime = 0;
+let lastElapsedSeconds = 0;
 
 export const generateFinishButton = () => {
   const timerContainer = document.querySelector('.timer-container');
@@ -102,6 +106,7 @@ function resumeTimer() {
 function updateTimer(finish = false) {
   if (!timerElement || !startTime) return;
   let elapsed = (Date.now() - startTime - pausedTime) / 1000;
+  lastElapsedSeconds = elapsed;
   let timeStr = '';
   if (elapsed >= 60) {
     const mins = Math.floor(elapsed / 60);
@@ -111,6 +116,10 @@ function updateTimer(finish = false) {
     timeStr = `Время: ${elapsed.toFixed(1)} сек`;
   }
   timerElement.textContent = timeStr + (finish ? ' (завершено)' : '');
+}
+
+export function getElapsedSeconds() {
+  return lastElapsedSeconds;
 }
 
 export function resetTimer() {
@@ -131,6 +140,7 @@ export const checkValues = () => {
   let userInputs = Array.from(document.querySelectorAll('input'));
   let correctCount = 0;
   let total = 0;
+  const wrongItems = [];
   userInputs.forEach((input, index) => {
     if (input.type !== 'text') {
       return;
@@ -147,20 +157,55 @@ export const checkValues = () => {
     } else {
       input.classList.add(errorColorName);
       input.classList.remove(correctColorName);
+      wrongItems.push({
+        message: parent?.dataset.message ?? '',
+        answer: correctValue,
+      });
     }
   });
+
+  document.querySelector('.retry-button')?.remove();
+
+  const mode = document.body.dataset.mode || 'exercise';
+  const stats = recordSession(mode, { correct: correctCount, total, seconds: getElapsedSeconds() });
+
   // Show result summary and time
   if (timerElement) {
     const result = document.createElement('div');
     result.classList.add('result-summary', 'text-center', 'mt-4', 'font-bold');
-    result.textContent = `Правильных ответов: ${correctCount} из ${total}. ${timerElement.textContent}`;
+    let text = `Правильных ответов: ${correctCount} из ${total}. ${timerElement.textContent}`;
+    if (stats) {
+      text += ` Серия идеальных раундов: ${stats.streak} (рекорд: ${stats.bestStreak}).`;
+    }
+    result.textContent = text;
     timerElement.parentElement.appendChild(result);
   }
+
+  if (wrongItems.length > 0) {
+    const retryButton = document.createElement('button');
+    retryButton.type = 'button';
+    retryButton.textContent = `Повторить ошибки (${wrongItems.length})`;
+    retryButton.classList.add('retry-button', 'w-80', 'block', 'mx-auto', 'mt-4', 'rounded', 'border', 'bg-yellow-500', 'font-bold', 'text-black');
+    retryButton.addEventListener('click', () => startRetryRound(wrongItems));
+    document.querySelector('main').appendChild(retryButton);
+  }
+}
+
+export const startRetryRound = (items) => {
+  document.querySelector('.retry-button')?.remove();
+  cleanContent();
+  const block = createNumbersBlock();
+  items.forEach(({ message, answer }) => generateNumberLine(message, answer, block));
+  document.querySelector('content').appendChild(block);
+  generateFinishButton();
+  document.querySelector('section').classList.remove('opacity-0');
 }
 
 export const generateNumberLine = (message, result, numberBlock) => {
   const parentElement = document.createElement('div');
   parentElement.classList.add('flex');
+  parentElement.dataset.message = message;
+  parentElement.dataset.answer = result;
 
   const line = document.createElement('span');
   line.classList.add('whitespace-nowrap');

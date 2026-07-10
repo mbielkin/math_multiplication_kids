@@ -21,6 +21,7 @@ const configs = {
     },
     getQuestion: ([a, b]) => `${a} x ${b} = `,
     getResult: ([a, b]) => a * b,
+    getTableKey: ([a]) => a,
     title: "Умножение",
   },
   divide: {
@@ -35,6 +36,7 @@ const configs = {
     },
     getQuestion: ([a, b]) => `${a} ÷ ${b} = `,
     getResult: ([a, b]) => a / b,
+    getTableKey: ([, divisor]) => divisor,
     title: "Деление",
   },
 };
@@ -48,16 +50,41 @@ const LEVELS_COMPLEXITY = {
 };
 const mainElement = document.querySelector('content');
 
+let selectedTable = 'all';
+let currentComplexity = null;
+
 document.querySelector('main').addEventListener('click', (event) => {
+  const table = event.target.getAttribute('data-table');
+  if (table !== null) {
+    selectedTable = table;
+    animateButton(event.target);
+    updateTableButtonsUI();
+    if (currentComplexity) {
+      resetTimer();
+      generateLevel(currentComplexity);
+      document.querySelector('section').classList.remove('opacity-0');
+    }
+    return;
+  }
+
   const complexity = event.target.getAttribute('data-complexity');
   if (!complexity) {
     return;
   }
+  currentComplexity = complexity;
   animateButton(event.target);
   resetTimer();
   generateLevel(complexity);
   document.querySelector('section').classList.remove('opacity-0');
 });
+
+function updateTableButtonsUI() {
+  document.querySelectorAll('[data-table]').forEach((button) => {
+    const isActive = button.getAttribute('data-table') === selectedTable;
+    button.classList.toggle('bg-blue-600', isActive);
+    button.classList.toggle('bg-gray-700', !isActive);
+  });
+}
 
 function generateLevel(complexity = LEVELS_COMPLEXITY.BASIC) {
   cleanContent();
@@ -69,6 +96,10 @@ function generateContent(level) {
   let rowCounter = 0;
   let numbersBlock = createNumbersBlock();
   let generatedData = config.generateFullArr();
+  if (selectedTable !== 'all') {
+    const tableNum = parseInt(selectedTable, 10);
+    generatedData = generatedData.filter((pair) => config.getTableKey(pair) === tableNum);
+  }
   if (level === LEVELS_COMPLEXITY.ADVANCED) {
     generatedData.sort(randomSort);
   }
@@ -80,4 +111,9 @@ function generateContent(level) {
       rowCounter = 0;
     }
   });
+  if (rowCounter > 0) {
+    mainElement.appendChild(numbersBlock);
+  }
 }
+
+updateTableButtonsUI();
