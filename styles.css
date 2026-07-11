@@ -8,6 +8,13 @@ html {
   scroll-behavior: smooth;
 }
 
+body {
+  /* +2px over the browser default so inherited (unclassed) text
+     matches the app-wide font-size bump; rem-based spacing/sizing
+     utilities are unaffected since those resolve against html, not body. */
+  font-size: 18px;
+}
+
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;
